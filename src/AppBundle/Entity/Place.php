@@ -3,7 +3,7 @@
 	namespace AppBundle\Entity;
 
 	use Symfony\Component\HttpFoundation\Request;
-	use Symfony\Component\Validator\Constraints as Assert;	
+	use Symfony\Component\Validator\Constraints as Assert;
 
 	class Place {
 		protected $places = array();
@@ -35,7 +35,15 @@
 		}
 
 		public function getPlaces(){
-			$url = sprintf("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=food|cafe|drink&keyword=%s&radius=5000&key=%s",
+			$types = array(
+				'food',
+				'cafe',
+				'drink',
+				'establishment',
+				);
+
+			$url = sprintf("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=%s&keyword=%s&rankby=distance&key=%s",
+				join($types, '|'),
 				$this->query,
 				$this->api_key
 				);
