@@ -3,10 +3,10 @@
 {% block body %}
 	<section class="row">
 		<div class="twelvecol last">
-			<h1>{{ num_results }} Result(s) for <span class="hilite">{{ query }}</span></h1>
-			<p><em class="open">Green</em> indicates the establishment is currently open</p>
+			<h1>{{ num_results }} Result(s) for <span class="hilite">{{ query }}</span>.</h1>
+			<p><em class="open">Green</em> indicates the establishment is currently open.  Locations which are permanently closed will not be returned.</p>
 
-			{% for place in places %}
+			{% for place in places if place.permanently_closed is not defined %}
 				{% if place.opening_hours is defined and place.opening_hours.open_now == '1' %}
 				<div class="row place place-{{place.id}} open">
 				{% else %}
