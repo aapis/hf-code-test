@@ -35,24 +35,25 @@
 		}
 
 		public function getPlaces(){
-			$url = sprintf('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=food|cafe|drink&keyword=%s&radius=5000&key=%s',
+			$url = sprintf("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=food|cafe|drink&keyword=%s&radius=5000&key=%s",
 				$this->query,
 				$this->api_key
 				);
-			$ch = curl_init(htmlspecialchars($url));
+			$ch = curl_init($url);
 
 			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_HTTPGET, true);
 
 			$request = json_decode(curl_exec($ch));
 
 			if($request && $request->status == 'OK'){
 				$this->places = $request->results;
 			}
-			
+
 			curl_close($ch);
-			
+
 			return $this->places;
 		}
 
