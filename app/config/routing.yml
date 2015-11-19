@@ -2,6 +2,10 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-map:
-    path: '/map'
-    defaults: { _controller: AppBundle::MapController }
+places:
+    path: /places
+    defaults: { _controller: AppBundle::PlacesController }
+
+result:
+    path: /result
+    defaults: { _controller: AppBundle::PlacesController }
