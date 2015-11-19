@@ -10,7 +10,7 @@
 
 	class PlacesController extends Controller {
 		/**
-		 * @Route("/places")
+		 * @Route("/")
 		 */
 		public function places(Request $request){
 			$place = new Place();
