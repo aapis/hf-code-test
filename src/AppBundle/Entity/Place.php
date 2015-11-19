@@ -58,6 +58,26 @@
 
 			if($request && $request->status == 'OK'){
 				$this->places = $request->results;
+				
+				//get more details about each place by making a second Place API
+				//request on each result
+				for($i = 0; $i < sizeof($request->results); $i++){
+					$details_url = sprintf("https://maps.googleapis.com/maps/api/place/details/json?placeid=%s&key=%s",
+						$request->results[$i]->place_id,
+						$this->api_key
+						);
+
+					$details_ch = curl_init($details_url);
+
+					curl_setopt($details_ch, CURLOPT_HEADER, 0);
+					curl_setopt($details_ch, CURLOPT_FOLLOWLOCATION, true);
+					curl_setopt($details_ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($details_ch, CURLOPT_HTTPGET, true);
+
+					$this->places[$i]->details = json_decode(curl_exec($details_ch))->result;
+
+					curl_close($details_ch);
+				}
 			}
 
 			curl_close($ch);

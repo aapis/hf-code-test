@@ -3,7 +3,7 @@
 {% block body %}
 	<section class="row">
 		<div class="twelvecol last">
-			<h1>{{ num_results }} Result(s) for <span class="hilite">{{ query }}</span>.</h1>
+			<h1>{{ num_results }} Result(s) for <span class="hilite">{{ query }}</span> within 10km of you.</h1>
 			<p><em class="open">Green</em> indicates the establishment is currently open.  Locations which are permanently closed will not be displayed.</p>
 
 			{% for place in places if place.permanently_closed is not defined %}
@@ -17,8 +17,34 @@
 					</div>
 
 					<div class="tencol last">
-						<h3>{{ place.name }}</h3>
-						<p>{{ place.vicinity }}</p>
+						{% if place.details.website is defined %}
+							<h3><a href="{{ place.details.website }}" target="_blank">{{ place.name }}</a></h3>
+						{% else %}
+							<h3>{{ place.name }}</h3>
+						{% endif %}
+						<ul>
+							{% if place.details.formatted_phone_number is defined %}
+								<li>{{ place.details.formatted_phone_number }}</li>
+							{% endif %}
+
+							{% if place.details.url is defined %}
+								<li><a href="{{ place.details.url }}" target="_blank">{{ place.vicinity }}</a></li>
+							{% endif %}
+
+							{% if place.details.opening_hours.weekday_text is defined %}
+								<li>Hours
+									<ul>
+										{% for time in place.details.opening_hours.weekday_text %}
+											<li>{{ time }}</li>
+										{% endfor %}
+									</ul>
+								</li>
+							{% endif %}
+
+							{% if place.rating is defined %}
+								<li>Rated {{ place.rating }} / 5</li>
+							{% endif %}
+						</ul>
 					</div>
 				</div>
 			{% endfor %}
