@@ -42,7 +42,7 @@
 				'establishment',
 				);
 
-			$url = sprintf("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=%s&keyword=%s&rankby=distance&key=%s",
+			$url = sprintf("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=53.55014,-113.46871&types=%s&keyword=%s&radius=10000&key=%s",
 				join($types, '|'),
 				$this->query,
 				$this->api_key

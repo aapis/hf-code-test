@@ -17,7 +17,7 @@
 
 			$form = $this->createFormBuilder($place)
 					->add('api_key', 'text', array('label' => 'API Key', 'data' => 'AIzaSyCiMs7T_ANR_qVNQIt6w0dAav13PMizuAw'))
-					->add('query', 'text')
+					->add('query', 'text', array('label' => "Type of food you're looking for (i.e. vegetarian, pho, italian)"))
 					->add('save', 'submit', array('label' => 'Get Info'))
 					->getForm();
 
