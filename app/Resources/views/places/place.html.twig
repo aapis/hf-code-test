@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section class="row">
+		<div class="twelvecol last">
+			<h1>Find Something</h1>
+			
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			{{ form_end(form) }}
+		</div>
+	</section>
+{% endblock %}

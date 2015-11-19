@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section class="row">
+		<div class="twelvecol last">
+			<h1>Results</h1>
+			<p>There were no results for <span class="hilite">{{ query }}</span>.</p>
+			<a href="/places">Search Again</a>
+		</div>
+	</section>
+{% endblock %}
